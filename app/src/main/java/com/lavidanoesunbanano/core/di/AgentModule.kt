@@ -1,7 +1,7 @@
 package com.lavidanoesunbanano.core.di
 
+import com.lavidanoesunbanano.data.remote.AgentClientProvider
 import com.lavidanoesunbanano.domain.agent.AgentClient
-import com.lavidanoesunbanano.domain.agent.FakeAgentClient
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,5 +14,5 @@ abstract class AgentModule {
 
     @Binds
     @Singleton
-    abstract fun bindAgentClient(impl: FakeAgentClient): AgentClient
+    abstract fun bindAgentClient(impl: AgentClientProvider): AgentClient
 }

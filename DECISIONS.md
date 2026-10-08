@@ -10,3 +10,7 @@
 8. Filtro de crisis: Evaluación pura en memoria previa a llamadas de red; si detecta palabras clave activa tarjeta de auxilio y cancela envío remoto.
 9. Configuración de seguridad de red: En debug permite 10.0.2.2 y agent.debugHost; en release exige HTTPS y bloquea cleartext.
 10. Fallback de apertura de Activity: UsageMonitorService usa SYSTEM_ALERT_WINDOW con notificación fullScreenIntent de respaldo para compatibilidad Android 10-15.
+11. Inyección de Agente IA: AgentClientProvider resuelve dinámicamente entre Fake y Remote según aiResponsesEnabled y BASE_URL sin condicionales if en la UI.
+12. Timeouts de red para IA: OkHttp callTimeout y withTimeout fijados en 8 segundos; ante fallo o expiración cae limpiamente a FakeAgentClient registrando en Logcat.
+13. Gráfico horario: Canvas nativo de Compose dibujando 24 barras horarias sin librerías de terceros.
+14. Borrado de datos: "Borrar todos mis datos" limpia Room, DataStore, detiene UsageMonitorService y regenera userId UUID v4 redirigiendo a Onboarding.

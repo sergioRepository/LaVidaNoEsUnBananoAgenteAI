@@ -9,10 +9,12 @@ import com.lavidanoesunbanano.ui.apps.AppSelectionScreen
 import com.lavidanoesunbanano.ui.apps.AppSelectionViewModel
 import com.lavidanoesunbanano.ui.config.RiskConfigScreen
 import com.lavidanoesunbanano.ui.config.RiskConfigViewModel
-import com.lavidanoesunbanano.ui.dashboard.DashboardPlaceholderScreen
+import com.lavidanoesunbanano.ui.dashboard.DashboardScreen
+import com.lavidanoesunbanano.ui.dashboard.DashboardViewModel
 import com.lavidanoesunbanano.ui.onboarding.OnboardingScreen
 import com.lavidanoesunbanano.ui.onboarding.OnboardingViewModel
-import com.lavidanoesunbanano.ui.settings.SettingsPlaceholderScreen
+import com.lavidanoesunbanano.ui.settings.SettingsScreen
+import com.lavidanoesunbanano.ui.settings.SettingsViewModel
 
 @Composable
 fun AppNavigation(
@@ -58,7 +60,9 @@ fun AppNavigation(
         }
 
         composable(Screen.Dashboard.route) {
-            DashboardPlaceholderScreen(
+            val viewModel: DashboardViewModel = hiltViewModel()
+            DashboardScreen(
+                viewModel = viewModel,
                 onNavigateToSettings = {
                     navController.navigate(Screen.Settings.route)
                 }
@@ -66,9 +70,22 @@ fun AppNavigation(
         }
 
         composable(Screen.Settings.route) {
-            SettingsPlaceholderScreen(
+            val viewModel: SettingsViewModel = hiltViewModel()
+            SettingsScreen(
+                viewModel = viewModel,
                 onNavigateBack = {
                     navController.popBackStack()
+                },
+                onNavigateToApps = {
+                    navController.navigate(Screen.AppSelection.route)
+                },
+                onNavigateToSchedule = {
+                    navController.navigate(Screen.RiskConfig.route)
+                },
+                onDataReset = {
+                    navController.navigate(Screen.Onboarding.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
                 }
             )
         }
