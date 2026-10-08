@@ -79,4 +79,15 @@ class InterventionLauncher @Inject constructor(
             }
         }
     }
+
+    /**
+     * Dispara una simulación inmediata del flujo completo de intervención sin depender de UsageStats.
+     */
+    fun launchSimulation() {
+        launch(
+            packageName = context.packageName,
+            reason = InterventionReason.TRIGGER_APP_IN_RISK_WINDOW,
+            sessionDurationSeconds = 12 * 60L // 12 minutos
+        )
+    }
 }
